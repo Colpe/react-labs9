@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { newEmployee } from '../redux/actions'
 
 
 class PageEmployeeCreate extends React.Component {
@@ -67,8 +68,11 @@ class PageEmployeeCreate extends React.Component {
     .then(res => {
       if(res.status !== 201) {
         this.setState({ isSaving: false, error: `Saving returned status ${res.status}`})
+        
       } else {
         this.props.history.push("/");
+        this.props.newEmployee(employee);
+
       }
     })  
   }
