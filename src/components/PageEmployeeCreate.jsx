@@ -1,5 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+
 
 class PageEmployeeCreate extends React.Component {
   constructor(props) {
@@ -66,6 +68,7 @@ class PageEmployeeCreate extends React.Component {
       if(res.status !== 201) {
         this.setState({ isSaving: false, error: `Saving returned status ${res.status}`})
       } else {
+        this.props.newEmployeeAdded(employee);
         this.props.history.push("/");
       }
     })  
@@ -95,4 +98,4 @@ class PageEmployeeCreate extends React.Component {
   }
 }
 
-export default withRouter(PageEmployeeCreate);
+export default connect()(withRouter(PageEmployeeCreate)); 
